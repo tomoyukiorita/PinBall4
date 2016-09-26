@@ -30,49 +30,36 @@ public class FripperController : MonoBehaviour {
 			SetAngle (this.defaultAngle);
 		}
 
-		if (Input.touchCount>0)
-		{
-			Touch touch = Input.GetTouch(0);
-			if(touch.phase == TouchPhase.Began&& Input.touches[0].position.x > Screen.width / 2 && tag == "LeftFripperTag"){
+		if (Input.touchCount > 0) {
+			for (int i = 0; i < Input.touches.Length; i++) {
 				
-				SetAngle (this.flickAngle);
-			}
+				Touch touch = Input.touches [i];
 
-			else if (touch.phase == TouchPhase.Ended)
-			{
-				SetAngle (this.defaultAngle);
-			}
-		}
+				if (touch.phase == TouchPhase.Began && Input.touches [0].position.x > Screen.width / 2 && tag == "RightFripperTag") {
+					SetAngle (this.flickAngle);
+				}else if (touch.phase == TouchPhase.Ended)
+				{
+					SetAngle (this.defaultAngle);
+				}
+				if(touch.phase == TouchPhase.Began && Input.touches[0].position.x < Screen.width / 2 && tag == "LeftFripperTag")
+				{
+					SetAngle (this.flickAngle);
+				}else if (touch.phase == TouchPhase.Ended)
+				{
+					SetAngle (this.defaultAngle);
+				}
+				if(touch.phase == TouchPhase.Began && Input.touches[0].position.x > Screen.width / 2 && tag == "RightFripperTag" && Input.touches[0].position.x < Screen.width / 2 && tag == "LeftFripperTag")
+				{
+					SetAngle (this.flickAngle);
+				}else if (touch.phase == TouchPhase.Ended)
+				{
+					SetAngle (this.defaultAngle);
+				}
 
-		if (Input.touchCount>0)
-		{
-			Touch touch = Input.GetTouch(0);
-			if(touch.phase == TouchPhase.Began && Input.touches[0].position.x > Screen.width / 2 && tag == "RightFripperTag")
-			{
-				SetAngle (this.flickAngle);
-			}
-
-			else if (touch.phase == TouchPhase.Ended)
-			{
-				SetAngle (this.defaultAngle);
-			}
-		}
-
-		if (Input.touchCount>0)
-		{
-			Touch touch = Input.GetTouch(0);
-			if(touch.phase == TouchPhase.Began && Input.touches[0].position.x > Screen.width / 2 && tag == "RightFripperTag" && Input.touches[0].position.x > Screen.width / 2 && tag == "RightFripperTag")
-			{
-				SetAngle (this.flickAngle);
-			}
-
-			else if (touch.phase == TouchPhase.Ended)
-			{
-				SetAngle (this.defaultAngle);
 			}
 		}
 
-	
+
 	}
 
 	public void SetAngle(float angle){
